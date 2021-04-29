@@ -84,7 +84,7 @@ test_that("ind_nematodes works with complete input", {
                   A_OPN_AP_SUB = A_OPN_AP_SUB,A_OPN_CR_TOT = A_OPN_CR_TOT,A_OPN_SU_TOT = A_OPN_SU_TOT,
                   A_NPN_SA_TOT = A_NPN_SA_TOT
     ),
-    expected = c(0.287, 0.246, 0.025, 0.213, 0.206, 0.019, 0.138, 0.391, 0.304, 0.272, 0.044, 0.158, 0.150, 0.208, 0.287),
+    expected = c(0.261, 0.224, 0.023, 0.193, 0.188, 0.017, 0.126, 0.356, 0.277, 0.247, 0.040, 0.144, 0.136, 0.189, 0.260),
     tolecance = 0.01
   )
 })
@@ -122,14 +122,14 @@ test_that("ind_nematodes works with complete input but with missing values", {
                   A_OPN_AP_SUB = A_OPN_AP_SUB,A_OPN_CR_TOT = A_OPN_CR_TOT,A_OPN_SU_TOT = A_OPN_SU_TOT,
                   A_NPN_SA_TOT = A_NPN_SA_TOT
     ),
-    expected = c(0.287, 0.246, 0.025, 0.213, 0.206, 0.019, 0.138, 0.391, 0.304, 0.272, 0.044, 0.158, 0.150, 0.208, 0.287),
+    expected = c(0.261, 0.224, 0.023, 0.193, 0.188, 0.017, 0.126, 0.356, 0.277, 0.247, 0.040, 0.144, 0.136, 0.189, 0.260),
     tolecance = 0.01
   )
 })
 
 
 # remove some measurement from input
-test_that("ind_nematodes works with complete input but with missing values", {
+test_that("ind_nematodes works with incomplete input", {
   expect_equal(
     ind_nematodes(B_LU_BRP = B_LU_BRP,
                   A_RLN_PR_TOT = A_RLN_PR_TOT,A_RLN_PR_CREN = A_RLN_PR_CREN,A_RLN_PR_NEG = A_RLN_PR_NEG,
@@ -153,7 +153,7 @@ test_that("ind_nematodes works with complete input but with missing values", {
                   A_OPN_AP_SUB = A_OPN_AP_SUB,A_OPN_CR_TOT = A_OPN_CR_TOT,A_OPN_SU_TOT = A_OPN_SU_TOT,
                   A_NPN_SA_TOT = A_NPN_SA_TOT
     ),
-    expected = c(0.287, 0.246, 0.025, 0.213, 0.206, 0.019, 0.138, 0.391, 0.304, 0.272, 0.044, 0.158, 0.150, 0.208, 0.287),
+    expected = c(0.261, 0.224, 0.023, 0.193, 0.188, 0.017, 0.126, 0.356, 0.277, 0.247, 0.040, 0.144, 0.136, 0.189, 0.260),
     tolecance = 0.01
   )
 })

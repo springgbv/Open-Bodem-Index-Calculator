@@ -162,18 +162,20 @@ ind_nematodes <- function(B_LU_BRP = B_LU_BRP,
   
   # merge with parameters logistic function
   dt.melt <- merge(dt.melt,nema.obic[,.(element,nem_x = geel, nem_b = b,nem_v = v,standaard)], by = c('element'))
-  
-  # filter only standard nematodes
-  dt.melt <- dt.melt[standaard == TRUE]
-  
+
   # replace missing values with zero
   dt.melt[is.na(number), number := 0]
   
   # estimate indicator value
   dt.melt[, value := evaluate_logistic(x = number, b = nem_b, x0 = nem_x, v = nem_v, increasing = FALSE),by = c('element')]
 
-  # round indicator value (plus correction since not all logistic gave value 1 when zero nematodes are measured)
-  dt.melt[, value := round(pmin(1,1.1*value),3)]
+  # set value of nematodes where number = 0 to 1
+  dt.melt[number == 0, value:= 1]
+  
+  # Select relevant nematodes given the crops in the rotation
+  
+  # round indicator value
+  dt.melt[, value := round(pmin(value),3)]
   
   # select the lowest score per field being the limiting value for soil quality
   out <- dt.melt[order(value),.SD[1L],by = id]

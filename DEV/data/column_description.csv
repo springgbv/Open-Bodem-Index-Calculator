@@ -1,4 +1,4 @@
-﻿column;type;description_nl;description_en;unit;method
+column;type;description_nl;description_en;unit;method
 A_CLAY_MI;measurement;Kleigehalte;Clay content;%;
 A_SAND_MI;measurement;Zandgehalte;Sand content;%;
 A_SILT_MI;measurement;Siltgehalte;Silt content;%;
@@ -99,6 +99,7 @@ I_P_CEC;indicator;Aggregaatstabiliteit;Aggregate stability;-;
 I_P_WO;indicator;Bewerkbaarheid;Workability;-;
 I_B_DI;indicator;Ziektewerendheid;Disease / pest resistance;;
 I_B_SF;indicator;Activiteit bodemleven;Soil life activity;;
+I_B_NEM;indicator;Plant parasitaire nematoden;Plant parasitic nematodes;;
 I_E_NGW;indicator;N  vasthoudend vermogen voor grondwater;Nitrogen retention for ground water;;
 I_E_NSW;indicator;N vasthoudend vermogen voor oppervlaktewater;Nitrogen retention for surface water;;
 I_M;indicator;Label Duurzaam Bodembeheer;Soil management evaluation;;

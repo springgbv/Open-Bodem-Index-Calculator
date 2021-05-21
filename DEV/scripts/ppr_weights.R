@@ -22,11 +22,19 @@
   # which are missing
   cols.mis <- colsd[!colsd %in% cols]
   
+  # which are superfluous
+  cols.super <- cols[!cols %in% colsd]
+  
   # checks
   if(length(cols.mis)==0){
     print('all indicators are also in column description')
   } else {
       print(paste0('indicators are missing: ',paste0(cols.mis,collapse=', ')))
   }
-
+  if(length(cols.super)==0) {
+    print('all indicators in weights.obic are also in column description')
+  } else {
+      print(paste0('some indicators are in weights.obic but do not have a column description: ', paste0(cols.super, collapse= ', ')))
+  }
+  
 save(weight.obic, file = "data/weight_obic.RData")

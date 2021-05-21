@@ -1,7 +1,7 @@
 Package: OBIC
 Type: Package
 Title: Functions for the Open Bodem Index (OBI)
-Version: 1.1.0.9000
+Version: 1.2.0.9000
 Authors@R: c(
     person("Sven", "Verweij", email = "sven.verweij@nmi-agro.nl", role = c("aut","cre")),
     person("Gerard", "Ros", email = "gerard.ros@nmi-agro.nl", role = "aut"),

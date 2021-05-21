@@ -1,4 +1,4 @@
-﻿variable;indicator;crop_category;weight_nonpeat;weight_peat
+variable;indicator;crop_category;weight_nonpeat;weight_peat
 W_C_N;I_C_N;akkerbouw;1;1
 W_C_P;I_C_P;akkerbouw;1;1
 W_C_K;I_C_K;akkerbouw;1;1
@@ -22,6 +22,7 @@ W_P_WO;I_P_WO;akkerbouw;1;1
 W_B_DI;I_B_DI;akkerbouw;1;1
 W_B_SF;I_B_SF;akkerbouw;1;1
 W_B_SB;I_B_SB;akkerbouw;1;1
+W_B_NEM;I_B_NEM;akkerbouw;-1;-1
 W_E_NGW;I_E_NGW;akkerbouw;1;1
 W_E_NSW;I_E_NSW;akkerbouw;1;1
 W_M;I_M;akkerbouw;1;1
@@ -73,6 +74,7 @@ W_P_WO;I_P_WO;mais;1;1
 W_B_DI;I_B_DI;mais;1;1
 W_B_SF;I_B_SF;mais;1;1
 W_B_SB;I_B_SB;mais;1;1
+W_B_NEM;I_B_NEM;mais;-1;-1
 W_E_NGW;I_E_NGW;mais;1;1
 W_E_NSW;I_E_NSW;mais;1;1
 W_M;I_M;mais;1;1
@@ -144,6 +146,7 @@ W_M_STRAWRESIDUE;I_M_STRAWRESIDUE;grasland;-1;-1
 W_M_MECHWEEDS;I_M_MECHWEEDS;grasland;-1;-1
 W_M_PESTICIDES_DST;I_M_PESTICIDES_DST;grasland;-1;-1
 W_B_EW_BCS;I_B_EW_BCS;grasland;-1;-1
+W_B_NEM;I_B_NEM;grasland;-1;-1
 W_P_C_BCS;I_P_C_BCS;grasland;-1;-1
 W_P_CC_BCS;I_P_CC_BCS;grasland;-1;-1
 W_P_GS_BCS;I_P_GS_BCS;grasland;-1;-1
@@ -195,6 +198,7 @@ W_M_STRAWRESIDUE;I_M_STRAWRESIDUE;natuur;-1;-1
 W_M_MECHWEEDS;I_M_MECHWEEDS;natuur;-1;-1
 W_M_PESTICIDES_DST;I_M_PESTICIDES_DST;natuur;-1;-1
 W_B_EW_BCS;I_B_EW_BCS;natuur;-1;-1
+W_B_NEM;I_B_NEM;natuur;-1;-1
 W_P_C_BCS;I_P_C_BCS;natuur;-1;-1
 W_P_CC_BCS;I_P_CC_BCS;natuur;-1;-1
 W_P_GS_BCS;I_P_GS_BCS;natuur;-1;-1

@@ -11,27 +11,30 @@
 ind_nematodes_list <- function(A_NEMA){
   nema.obic <- as.data.table(OBIC::nema.obic)
   
-  geel = rood = species = standaard = b = v = count = nem_score = NULL
+  geel = rood = species = standaard = b = v = count = nem_score = id = NULL
   
   checkmate::assert_data_table(A_NEMA)
   checkmate::assert_numeric(A_NEMA[,count])
   checkmate::assert_subset(x = A_NEMA[,species],choices = nema.obic[,species])
   
-  # merge dd and nema.obic and remove non standard non counted nematodes from dd
+  # merge dd and nema.obic and remove non counted nematodes from dd
   dd <- merge.data.table(nema.obic, A_NEMA, by = 'species', all.x = TRUE)
-  dd <- dd[standaard == TRUE|!is.na(count)]
+
+  # Add id to data.table
+  dd[,id := 1:nrow(dd)]
   
-  # Check if all standard nematodes are present
-  if(checkmate::anyMissing(dd[,count])){
-    errorCondition('at least one of the "standard" nematodes seems to be a missing value, its assumed this nematode is counted and is equal to 0.')
-  } 
   # Calculate score for each individual nematode species
   dd[,nem_score := OBIC::evaluate_logistic(dd[,count], b = dd[,b], x0 = dd[,geel], v = dd[,v], increasing = FALSE)]
   # Set scores where count = 0 to 1
   dd[count == 0, nem_score:=1]
   
-  value <- mean(dd[,nem_score])
-  return(value)
+  # round indicator value
+  dd[, nem_score := round(pmin(nem_score),3)]
+  
+  # select the lowest score per field being the limiting value for soil quality
+  out <- min(dd[,nem_score], na.rm = TRUE)
+  
+  return(out)
 } 
 
 #' Calculate indicator for plant parasitic nematodes
@@ -162,18 +165,20 @@ ind_nematodes <- function(B_LU_BRP = B_LU_BRP,
   
   # merge with parameters logistic function
   dt.melt <- merge(dt.melt,nema.obic[,.(element,nem_x = geel, nem_b = b,nem_v = v,standaard)], by = c('element'))
-  
-  # filter only standard nematodes
-  dt.melt <- dt.melt[standaard == TRUE]
-  
+
   # replace missing values with zero
   dt.melt[is.na(number), number := 0]
   
   # estimate indicator value
   dt.melt[, value := evaluate_logistic(x = number, b = nem_b, x0 = nem_x, v = nem_v, increasing = FALSE),by = c('element')]
 
-  # round indicator value (plus correction since not all logistic gave value 1 when zero nematodes are measured)
-  dt.melt[, value := round(pmin(1,1.1*value),3)]
+  # set value of nematodes where number = 0 to 1
+  dt.melt[number == 0, value:= 1]
+  
+  # Select relevant nematodes given the crops in the rotation
+  
+  # round indicator value
+  dt.melt[, value := round(pmin(value),3)]
   
   # select the lowest score per field being the limiting value for soil quality
   out <- dt.melt[order(value),.SD[1L],by = id]

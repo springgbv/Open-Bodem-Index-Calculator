@@ -58,6 +58,62 @@
 #' @param M_STRAWRESIDUE (boolean) measure. Application of straw residues (option: yes or no)
 #' @param M_MECHWEEDS (boolean) measure. Use of mechanical weed protection (option: yes or no)
 #' @param M_PESTICIDES_DST (boolean) measure. Use of DST for pesticides (option: yes or no)
+#' @param A_RLN_PR_TOT (numeric) Number of pratylenchus spp. (n / 100g)
+#' @param A_RLN_PR_CREN (numeric) Number of pratylenchus crenatus (n / 100g)
+#' @param A_RLN_PR_NEG (numeric) Number of pratylenchus neglectus (n / 100g)
+#' @param A_RLN_PR_PEN (numeric) Number of pratylenchus penetrans (n / 100g)
+#' @param A_RLN_PR_PRA (numeric) Number of pratylenchus pratensis (n / 100g)
+#' @param A_RLN_PR_THO (numeric) Number of pratylenchus thornei (n / 100g)
+#' @param A_RLN_PR_FLA (numeric) Number of pratylenchus flakkensis (n / 100g)
+#' @param A_RLN_PR_FAL (numeric) Number of pratylenchus fallax (n / 100g)
+#' @param A_RLN_PR_PIN (numeric) Number of pratylenchus pinguicaudatus (n / 100g)
+#' @param A_RLN_PR_PSE (numeric) Number of pratylenchus pseudopratensis (n / 100g)
+#' @param A_RLN_PR_VUL (numeric) Number of pratylenchus vulnus (n / 100g)
+#' @param A_RLN_PR_DUN (numeric) Number of pratylenchus dunensis (n / 100g)
+#' @param A_RLN_PR_ZEA (numeric) Number of pratylenchus zeae (n / 100g)
+#' @param A_RKN_ME_TOT (numeric) Number of meloidogyne spp. (n / 100g)
+#' @param A_RKN_ME_HAP (numeric) Number of meloidogyne hapla (n / 100g)
+#' @param A_RKN_ME_CHIFAL (numeric) Number of meloidogyne chitwoodi/fallax (n / 100g)
+#' @param A_RKN_ME_CHI (numeric) Number of meloidogyne chitwoodi (n / 100g)
+#' @param A_RKN_ME_NAA (numeric) Number of meloidogyne naasi (n / 100g)
+#' @param A_RKN_ME_FAL (numeric) Number of meloidogyne fallax (n / 100g)
+#' @param A_RKN_ME_MIN (numeric) Number of meloidogyne minor (n / 100g)
+#' @param A_RKN_ME_INC (numeric) Number of meloidogyne incognita (n / 100g)
+#' @param A_RKN_ME_JAV (numeric) Number of meloidogyne javanica (n / 100g)
+#' @param A_RKN_ME_ART (numeric) Number of meloidogyne artiellia (n / 100g)
+#' @param A_RKN_ME_ARE (numeric) Number of meloidogyne arenaria (n / 100g)
+#' @param A_RKN_ME_ARD (numeric) Number of meloidogyne ardenensis (n / 100g)
+#' @param A_DSN_TR_TOT (numeric) Number of trichodoridae spp. (n / 100g)
+#' @param A_DSN_TR_SIM (numeric) Number of trichodorus similis (n / 100g)
+#' @param A_DSN_TR_PRI (numeric) Number of trichodorus primitivus (n / 100g)
+#' @param A_DSN_TR_VIR (numeric) Number of trichodorus viruliferus (n / 100g)
+#' @param A_DSN_TR_SPA (numeric) Number of trichodorus sparsus (n / 100g)
+#' @param A_DSN_TR_CYL (numeric) Number of trichodorus cylindricus (n / 100g)
+#' @param A_DSN_TR_HOO (numeric) Number of trichodorus hooperi (n / 100g)
+#' @param A_DSN_PA_TER (numeric) Number of paratrichodorus teres (n / 100g)
+#' @param A_DSN_PA_PAC (numeric) Number of paratrichodorus pachydermus (n / 100g)
+#' @param A_DSN_PA_ANE (numeric) Number of paratrichodorus anemones (n / 100g)
+#' @param A_DSN_PA_NAN (numeric) Number of paratrichodorus nanus (n / 100g)
+#' @param A_DSN_TY_TOT (numeric) Number of tylenchorhynchus spp. (n / 100g)
+#' @param A_DSN_RO_TOT (numeric) Number of rotylenchus spp. (n / 100g)
+#' @param A_DSN_XI_TOT (numeric) Number of xiphinema spp. (n / 100g)
+#' @param A_DSN_LO_TOT (numeric) Number of longidorus spp. (n / 100g)
+#' @param A_DSN_HEM_TOT (numeric) Number of hemicycliophora spp. (n / 100g)
+#' @param A_DSN_HEL_TOT (numeric) Number of helicotylenchus spp. (n / 100g)
+#' @param A_SN_DI_TOT (numeric) Number of ditylenchus spp. (n / 100g)
+#' @param A_SN_DI_DIP (numeric) Number of ditylenchus dipsaci (n / 100g)
+#' @param A_SN_DI_DES (numeric) Number of ditylenchus destructor (n / 100g)
+#' @param A_OPN_PA_TOT (numeric) Number of paratylenchus spp. (n / 100g)
+#' @param A_OPN_PA_BUK (numeric) Number of paratylenchus bukowinensis (n / 100g)
+#' @param A_OPN_CY_TOT (numeric) Number of cysteaaltjes (n / 100g)
+#' @param A_OPN_AP_TOT (numeric) Number of aphelenchoides spp. (n / 100g)
+#' @param A_OPN_AP_FRA (numeric) Number of aphelenchoides fragariae (n / 100g)
+#' @param A_OPN_AP_RIT (numeric) Number of aphelenchoides ritzemabosi (n / 100g)
+#' @param A_OPN_AP_SUB (numeric) Number of aphelenchoides subtenuis (n / 100g)
+#' @param A_OPN_CR_TOT (numeric) Number of criconematidae spp. (n / 100g)
+#' @param A_OPN_SU_TOT (numeric) Number of subanguina spp. (n / 100g)
+#' @param A_NPN_SA_TOT (numeric) Number of saprofage en overige (n / 100g)
+#' @param A_NEMA (data.table) Long data table with the counted nematodes of a parcel can be used instead of separate nematode entries
 #' @param ID (character) A field id
 #' @param output (character) An optional argument to select output: obic_score, scores, indicators, recommendations, or all. (default = all)
 #' 
@@ -78,6 +134,14 @@ obic_field <- function(B_SOILTYPE_AGR,B_GWL_CLASS,B_SC_WENR,B_HELP_WENR,B_AER_CB
                        M_SLEEPHOSE = NA,M_DRAIN = NA,M_DITCH = NA,M_UNDERSEED = NA,
                        M_LIME = NA, M_NONINVTILL = NA, M_SSPM = NA, M_SOLIDMANURE = NA,
                        M_STRAWRESIDUE = NA,M_MECHWEEDS = NA,M_PESTICIDES_DST = NA,
+                       A_RLN_PR_TOT=0, A_RLN_PR_CREN=0, A_RLN_PR_NEG=0, A_RLN_PR_PEN=0, A_RLN_PR_PRA=0, A_RLN_PR_THO=0, A_RLN_PR_FLA=0,    
+                       A_RLN_PR_FAL=0, A_RLN_PR_PIN=0, A_RLN_PR_PSE=0, A_RLN_PR_VUL=0, A_RLN_PR_DUN=0, A_RLN_PR_ZEA=0, A_RKN_ME_TOT=0,   
+                       A_RKN_ME_HAP=0, A_RKN_ME_CHIFAL=0, A_RKN_ME_CHI=0, A_RKN_ME_NAA=0, A_RKN_ME_FAL=0, A_RKN_ME_MIN=0, A_RKN_ME_INC=0,    
+                       A_RKN_ME_JAV=0, A_RKN_ME_ART=0, A_RKN_ME_ARE=0, A_RKN_ME_ARD=0, A_DSN_TR_TOT=0, A_DSN_TR_SIM=0, A_DSN_TR_PRI=0,    
+                       A_DSN_TR_VIR=0, A_DSN_TR_SPA=0, A_DSN_TR_CYL=0, A_DSN_TR_HOO=0, A_DSN_PA_TER=0, A_DSN_PA_PAC=0, A_DSN_PA_ANE=0,    
+                       A_DSN_PA_NAN=0, A_DSN_TY_TOT=0, A_DSN_RO_TOT=0, A_DSN_XI_TOT=0, A_DSN_LO_TOT=0, A_DSN_HEM_TOT=0, A_DSN_HEL_TOT=0,   
+                       A_SN_DI_TOT=0, A_SN_DI_DIP=0, A_SN_DI_DES=0, A_OPN_PA_TOT=0, A_OPN_PA_BUK=0, A_OPN_CY_TOT=0, A_OPN_AP_TOT=0,    
+                       A_OPN_AP_FRA=0, A_OPN_AP_RIT=0, A_OPN_AP_SUB=0, A_OPN_CR_TOT=0, A_OPN_SU_TOT = 0,A_NPN_SA_TOT = 0, A_NEMA = NA,
                        ID = 1, output = 'all') {
   
   
@@ -88,7 +152,7 @@ obic_field <- function(B_SOILTYPE_AGR,B_GWL_CLASS,B_SC_WENR,B_HELP_WENR,B_AER_CB
   D_AS =  D_BCS = D_WRI = D_WSI_DS = D_WSI_WS = D_NGW = D_NSW = D_WO = B_GWL_GLG = B_GWL_GHG = B_Z_TWO = NULL
   
   I_C_N = I_C_P = I_C_K = I_C_MG = I_C_S = I_C_PH = I_C_CEC = I_C_CU = I_C_ZN = I_P_WRI = I_BCS = NULL
-  I_P_CR = I_P_SE = I_P_MS = I_P_BC = I_P_DU = I_P_CO = D_P_CO = I_B_DI = I_B_SF = I_B_SB = I_M = NULL
+  I_P_CR = I_P_SE = I_P_MS = I_P_BC = I_P_DU = I_P_CO = D_P_CO = I_B_DI = I_B_SF = I_B_SB = I_B_NEM = I_M = NULL
   I_P_DS = I_P_WS = I_P_CEC = D_P_CEC= I_P_WO = I_E_NGW = I_E_NSW = NULL
   I_M_GREEN = I_M_COMPOST = I_M_NONBARE = I_M_EARLYCROP = I_M_SLEEPHOSE = I_M_DRAIN = I_M_DITCH = I_M_UNDERSEED = NULL
   I_M_LIME = I_M_NONINVTILL = I_M_SSPM = I_M_SOLIDMANURE = I_M_STRAWRESIDUE = I_M_MECHWEEDS = I_M_PESTICIDES_DST = NULL
@@ -157,9 +221,65 @@ obic_field <- function(B_SOILTYPE_AGR,B_GWL_CLASS,B_SC_WENR,B_HELP_WENR,B_AER_CB
                    M_SOLIDMANURE = M_SOLIDMANURE,
                    M_STRAWRESIDUE = M_STRAWRESIDUE,
                    M_MECHWEEDS = M_MECHWEEDS,
-                   M_PESTICIDES_DST = M_PESTICIDES_DST
-                   )
+                   M_PESTICIDES_DST = M_PESTICIDES_DST,
+                   A_RLN_PR_TOT = A_RLN_PR_TOT,
+                   A_RLN_PR_CREN = A_RLN_PR_CREN,
+                   A_RLN_PR_NEG = A_RLN_PR_NEG,
+                   A_RLN_PR_PEN = A_RLN_PR_PEN,
+                   A_RLN_PR_PRA = A_RLN_PR_PRA,
+                   A_RLN_PR_THO = A_RLN_PR_THO,
+                   A_RLN_PR_FLA = A_RLN_PR_FLA,    
+                   A_RLN_PR_FAL = A_RLN_PR_FAL,
+                   A_RLN_PR_PIN = A_RLN_PR_PIN,
+                   A_RLN_PR_PSE = A_RLN_PR_PSE,
+                   A_RLN_PR_VUL = A_RLN_PR_VUL,
+                   A_RLN_PR_DUN = A_RLN_PR_DUN,
+                   A_RLN_PR_ZEA = A_RLN_PR_ZEA,
+                   A_RKN_ME_TOT = A_RKN_ME_TOT,   
+                   A_RKN_ME_HAP = A_RKN_ME_HAP,
+                   A_RKN_ME_CHIFAL = A_RKN_ME_CHIFAL,
+                   A_RKN_ME_CHI = A_RKN_ME_CHI,
+                   A_RKN_ME_NAA = A_RKN_ME_NAA,
+                   A_RKN_ME_FAL = A_RKN_ME_FAL,
+                   A_RKN_ME_MIN = A_RKN_ME_MIN,
+                   A_RKN_ME_INC = A_RKN_ME_INC,    
+                   A_RKN_ME_JAV = A_RKN_ME_JAV,
+                   A_RKN_ME_ART = A_RKN_ME_ART,
+                   A_RKN_ME_ARE = A_RKN_ME_ARE,
+                   A_RKN_ME_ARD = A_RKN_ME_ARD,
+                   A_DSN_TR_TOT = A_DSN_TR_TOT,
+                   A_DSN_TR_SIM = A_DSN_TR_SIM,
+                   A_DSN_TR_PRI = A_DSN_TR_PRI,    
+                   A_DSN_TR_VIR = A_DSN_TR_VIR,
+                   A_DSN_TR_SPA = A_DSN_TR_SPA,
+                   A_DSN_TR_CYL = A_DSN_TR_CYL,
+                   A_DSN_TR_HOO = A_DSN_TR_HOO,
+                   A_DSN_PA_TER = A_DSN_PA_TER,
+                   A_DSN_PA_PAC = A_DSN_PA_PAC,
+                   A_DSN_PA_ANE = A_DSN_PA_ANE,    
+                   A_DSN_PA_NAN = A_DSN_PA_NAN,
+                   A_DSN_TY_TOT = A_DSN_TY_TOT,
+                   A_DSN_RO_TOT = A_DSN_RO_TOT,
+                   A_DSN_XI_TOT = A_DSN_XI_TOT,
+                   A_DSN_LO_TOT = A_DSN_LO_TOT,
+                   A_DSN_HEM_TOT = A_DSN_HEM_TOT,
+                   A_DSN_HEL_TOT = A_DSN_HEL_TOT,   
+                   A_SN_DI_TOT = A_SN_DI_TOT,
+                   A_SN_DI_DIP = A_SN_DI_DIP,
+                   A_SN_DI_DES = A_SN_DI_DES,
+                   A_OPN_PA_TOT = A_OPN_PA_TOT,
+                   A_OPN_PA_BUK = A_OPN_PA_BUK,
+                   A_OPN_CY_TOT = A_OPN_CY_TOT,
+                   A_OPN_AP_TOT = A_OPN_AP_TOT,    
+                   A_OPN_AP_FRA = A_OPN_AP_FRA,
+                   A_OPN_AP_RIT = A_OPN_AP_RIT,
+                   A_OPN_AP_SUB = A_OPN_AP_SUB,
+                   A_OPN_CR_TOT = A_OPN_CR_TOT,
+                   A_OPN_SU_TOT = A_OPN_SU_TOT,
+                   A_NPN_SA_TOT = A_NPN_SA_TOT)
   
+  # Copy I_NEMA table when present
+  if(!is.na(I_NEMA)) {I_NEMA <- copy(I_NEMA)}
   
   # Merge dt with crops.obic
   dt <- merge(dt,OBIC::crops.obic[,list(crop_code,crop_category)], by.x = 'B_LU_BRP', by.y = 'crop_code') 
@@ -267,6 +387,17 @@ obic_field <- function(B_SOILTYPE_AGR,B_GWL_CLASS,B_SC_WENR,B_HELP_WENR,B_AER_CB
     # Calculate indicators for soil biological functions
     dt[, I_B_DI := ind_resistance(A_SOM_LOI)]
     dt[, I_B_SF := ind_pmn(D_PMN)]
+    dt[, I_B_NEM := fifelse(is.na(A_NEMA),ind_nematodes(B_LU_BRP = B_LU_BRP,
+                                  A_RLN_PR_TOT, A_RLN_PR_CREN, A_RLN_PR_NEG, A_RLN_PR_PEN, A_RLN_PR_PRA, A_RLN_PR_THO, A_RLN_PR_FLA,    
+                                  A_RLN_PR_FAL, A_RLN_PR_PIN, A_RLN_PR_PSE, A_RLN_PR_VUL, A_RLN_PR_DUN, A_RLN_PR_ZEA, A_RKN_ME_TOT,   
+                                  A_RKN_ME_HAP, A_RKN_ME_CHIFAL, A_RKN_ME_CHI, A_RKN_ME_NAA, A_RKN_ME_FAL, A_RKN_ME_MIN, A_RKN_ME_INC,    
+                                  A_RKN_ME_JAV, A_RKN_ME_ART, A_RKN_ME_ARE, A_RKN_ME_ARD, A_DSN_TR_TOT, A_DSN_TR_SIM, A_DSN_TR_PRI,    
+                                  A_DSN_TR_VIR, A_DSN_TR_SPA, A_DSN_TR_CYL, A_DSN_TR_HOO, A_DSN_PA_TER, A_DSN_PA_PAC, A_DSN_PA_ANE,    
+                                  A_DSN_PA_NAN, A_DSN_TY_TOT, A_DSN_RO_TOT, A_DSN_XI_TOT, A_DSN_LO_TOT, A_DSN_HEM_TOT, A_DSN_HEL_TOT,   
+                                  A_SN_DI_TOT, A_SN_DI_DIP, A_SN_DI_DES, A_OPN_PA_TOT, A_OPN_PA_BUK, A_OPN_CY_TOT, A_OPN_AP_TOT,    
+                                  A_OPN_AP_FRA, A_OPN_AP_RIT, A_OPN_AP_SUB, A_OPN_CR_TOT, A_OPN_SU_TOT,A_NPN_SA_TOT),
+                            ind_nematodes_list(A_NEMA))
+       ]
   
     # Calculate indicators for soil visual assessment (optional)
     bcs.par <- c('I_B_EW_BCS', 'I_P_SC_BCS', 'I_P_GS_BCS', 'I_P_P_BCS', 'I_P_C_BCS', 'I_P_RT_BCS', 'I_P_RD_BCS',
@@ -487,10 +618,22 @@ obic_field_dt <- function(dt,output = 'all') {
   smc.all <- 'M_COMPOST'
   smc.missing <- smc.all[!smc.all %in% colnames(dt)]
   
+  # chek if nematodes are missing
+  nema.all <- c('A_RLN_PR_TOT', 'A_RLN_PR_CREN', 'A_RLN_PR_NEG', 'A_RLN_PR_PEN', 'A_RLN_PR_PRA', 'A_RLN_PR_THO', 'A_RLN_PR_FLA', 
+                'A_RLN_PR_FAL', 'A_RLN_PR_PIN', 'A_RLN_PR_PSE', 'A_RLN_PR_VUL', 'A_RLN_PR_DUN', 'A_RLN_PR_ZEA', 'A_RKN_ME_TOT', 
+                'A_RKN_ME_HAP', 'A_RKN_ME_CHIFAL', 'A_RKN_ME_CHI', 'A_RKN_ME_NAA', 'A_RKN_ME_FAL', 'A_RKN_ME_MIN', 'A_RKN_ME_INC', 
+                'A_RKN_ME_JAV', 'A_RKN_ME_ART', 'A_RKN_ME_ARE', 'A_RKN_ME_ARD', 'A_DSN_TR_TOT', 'A_DSN_TR_SIM', 'A_DSN_TR_PRI', 
+                'A_DSN_TR_VIR', 'A_DSN_TR_SPA', 'A_DSN_TR_CYL', 'A_DSN_TR_HOO', 'A_DSN_PA_TER', 'A_DSN_PA_PAC', 'A_DSN_PA_ANE', 
+                'A_DSN_PA_NAN', 'A_DSN_TY_TOT', 'A_DSN_RO_TOT', 'A_DSN_XI_TOT', 'A_DSN_LO_TOT', 'A_DSN_HEM_TOT', 'A_DSN_HEL_TOT', 
+                'A_SN_DI_TOT', 'A_SN_DI_DIP', 'A_SN_DI_DES', 'A_OPN_PA_TOT', 'A_OPN_PA_BUK', 'A_OPN_CY_TOT', 'A_OPN_AP_TOT', 
+                'A_OPN_AP_FRA', 'A_OPN_AP_RIT', 'A_OPN_AP_SUB', 'A_OPN_CR_TOT', 'A_OPN_SU_TOT', 'A_NPN_SA_TOT')
+  nema.missing <- nema.all[!nema.all %in% colnames(dt)]
+  
   # extend dt with missing elements, so that these are replaced by default estimates
   if(length(bcs.missing)>0){dt[,c(bcs.missing) := NA]}
   if(length(sm.missing)>0){dt[,c(sm.missing) := NA]}
   if(length(smc.missing)>0){dt[,c(smc.missing) := NA_real_]}
+  if(length(nema.missing)>0){dt[,c(nema.missing) := NA_integer_]}
   
   # calculate obic_field
   out <- obic_field(dt$B_SOILTYPE_AGR,dt$B_GWL_CLASS,dt$B_SC_WENR,dt$B_HELP_WENR,dt$B_AER_CBS,
@@ -507,6 +650,14 @@ obic_field_dt <- function(dt,output = 'all') {
                     dt$M_SLEEPHOSE,dt$M_DRAIN,dt$M_DITCH,dt$M_UNDERSEED,
                     dt$M_LIME, dt$M_NONINVTILL, dt$M_SSPM, dt$M_SOLIDMANURE,
                     dt$M_STRAWRESIDUE,dt$M_MECHWEEDS,dt$M_PESTICIDES_DST,
+                    dt$A_RLN_PR_TOT, dt$A_RLN_PR_CREN, dt$A_RLN_PR_NEG, dt$A_RLN_PR_PEN, dt$A_RLN_PR_PRA, dt$A_RLN_PR_THO, dt$A_RLN_PR_FLA, 
+                    dt$A_RLN_PR_FAL, dt$A_RLN_PR_PIN, dt$A_RLN_PR_PSE, dt$A_RLN_PR_VUL, dt$A_RLN_PR_DUN, dt$A_RLN_PR_ZEA, dt$A_RKN_ME_TOT, 
+                    dt$A_RKN_ME_HAP, dt$A_RKN_ME_CHIFAL, dt$A_RKN_ME_CHI, dt$A_RKN_ME_NAA, dt$A_RKN_ME_FAL, dt$A_RKN_ME_MIN, dt$A_RKN_ME_INC, 
+                    dt$A_RKN_ME_JAV, dt$A_RKN_ME_ART, dt$A_RKN_ME_ARE, dt$A_RKN_ME_ARD, dt$A_DSN_TR_TOT, dt$A_DSN_TR_SIM, dt$A_DSN_TR_PRI, 
+                    dt$A_DSN_TR_VIR, dt$A_DSN_TR_SPA, dt$A_DSN_TR_CYL, dt$A_DSN_TR_HOO, dt$A_DSN_PA_TER, dt$A_DSN_PA_PAC, dt$A_DSN_PA_ANE, 
+                    dt$A_DSN_PA_NAN, dt$A_DSN_TY_TOT, dt$A_DSN_RO_TOT, dt$A_DSN_XI_TOT, dt$A_DSN_LO_TOT, dt$A_DSN_HEM_TOT, dt$A_DSN_HEL_TOT, 
+                    dt$A_SN_DI_TOT, dt$A_SN_DI_DIP, dt$A_SN_DI_DES, dt$A_OPN_PA_TOT, dt$A_OPN_PA_BUK, dt$A_OPN_CY_TOT, dt$A_OPN_AP_TOT, 
+                    dt$A_OPN_AP_FRA, dt$A_OPN_AP_RIT, dt$A_OPN_AP_SUB, dt$A_OPN_CR_TOT, dt$A_OPN_SU_TOT, dt$A_NPN_SA_TOT,
                     ID = 1,output = output)
   
   # return output

@@ -1,4 +1,22 @@
 # Changelog OBIC
+## Version 1.2.0 2021-04-03
+### Added
+* arguments A_RLN_PR_TOT, A_RLN_PR_CREN, A_RLN_PR_NEG, A_RLN_PR_PEN, A_RLN_PR_PRA, A_RLN_PR_THO, A_RLN_PR_FLA,  
+                                  A_RLN_PR_FAL, A_RLN_PR_PIN, A_RLN_PR_PSE, A_RLN_PR_VUL, A_RLN_PR_DUN, A_RLN_PR_ZEA, A_RKN_ME_TOT,   
+                                  A_RKN_ME_HAP, A_RKN_ME_CHIFAL, A_RKN_ME_CHI, A_RKN_ME_NAA, A_RKN_ME_FAL, A_RKN_ME_MIN, A_RKN_ME_INC,    
+                                  A_RKN_ME_JAV, A_RKN_ME_ART, A_RKN_ME_ARE, A_RKN_ME_ARD, A_DSN_TR_TOT, A_DSN_TR_SIM, A_DSN_TR_PRI,    
+                                  A_DSN_TR_VIR, A_DSN_TR_SPA, A_DSN_TR_CYL, A_DSN_TR_HOO, A_DSN_PA_TER, A_DSN_PA_PAC, A_DSN_PA_ANE,    
+                                  A_DSN_PA_NAN, A_DSN_TY_TOT, A_DSN_RO_TOT, A_DSN_XI_TOT, A_DSN_LO_TOT, A_DSN_HEM_TOT, A_DSN_HEL_TOT,   
+                                  A_SN_DI_TOT, A_SN_DI_DIP, A_SN_DI_DES, A_OPN_PA_TOT, A_OPN_PA_BUK, A_OPN_CY_TOT, A_OPN_AP_TOT,    
+                                  A_OPN_AP_FRA, A_OPN_AP_RIT, A_OPN_AP_SUB, A_OPN_CR_TOT, A_OPN_SU_TOT, A_NPN_SA_TOT, to obic_field and obic_field_dt and A_NEMA to obic_field
+* functions ind_nematodes and ind_nematodes_list work but are not yet weighted for scoring
+* check to ppr_weight_obic to check if all indicators in weight.obic occur in column_descriptions_obic
+
+### Changed
+* updated documentation for nematodes
+* updated weights.obic
+* update column_descriptions_obic.Rdata
+
 
 ## Version 1.1.0 2021-05-03
 ### Added

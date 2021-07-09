@@ -11,7 +11,7 @@ calc_workability(
   B_SOILTYPE_AGR,
   B_GWL_GLG,
   B_GWL_GHG,
-  B_Z_TWO,
+  B_GWL_ZCRIT,
   calcyieldloss = FALSE
 )
 }
@@ -28,12 +28,16 @@ calc_workability(
 
 \item{B_GWL_GHG}{(numeric) The highest groundwater level averaged over the most wet periods in 8 years in cm below ground level}
 
-\item{B_Z_TWO}{(numeric) The distance between ground level and groundwater level at which the groundwater can supply the soil surface with 2mm water per day (in cm)}
+\item{B_GWL_ZCRIT}{(numeric) The distance between ground level and groundwater level at which the groundwater can supply the soil surface with 2mm water per day (in cm)}
 
 \item{calcyieldloss}{(boolean) whether the function includes yield loss, options: TRUE or FALSE (default).}
 }
 \description{
-This function calculates the workability of soils, given as potential length of the growing season. Based on Huinink (2018)
+This function calculates the workability of soils, given as a value of relative season length between 0 and 1. 
+A relative season length of 1 indicates that the water table is sufficiently low for the soil to be workable for the entire growing season required by the crop.
+The required ground water table for workability is determined by soil type and soil properties. Hydrological variables determine the groundwater table for each day of the year.
+The option calcyieldloss allows for calculation of yield loss based on the relative season length, differentiating in yield loss between six groups of crops
+Based on Huinink (2018)
 }
 \references{
 Huinink (2018) Bodem/perceel geschiktheidsbeoordeling voor Landbouw, Bosbouw en Recreatie. BodemConsult-Arnhem

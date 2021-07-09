@@ -12,7 +12,7 @@ obic_field(
   B_AER_CBS,
   B_GWL_GLG,
   B_GWL_GHG,
-  B_Z_TWO,
+  B_GWL_ZCRIT,
   B_LU_BRP,
   A_SOM_LOI,
   A_SAND_MI,
@@ -80,7 +80,7 @@ obic_field(
 
 \item{B_GWL_GHG}{(numeric) The highest groundwater level averaged over the most wet periods in 8 years in cm below ground level}
 
-\item{B_Z_TWO}{(numeric) The distance between ground level and groundwater level at which the groundwater can supply the soil surface with 2mm water per day (in cm)}
+\item{B_GWL_ZCRIT}{(numeric) The distance between ground level and groundwater level at which the groundwater can supply the soil surface with 2mm water per day (in cm)}
 
 \item{B_LU_BRP}{(numeric) a series with crop codes given the crop rotation plan (source: the BRP)}
 

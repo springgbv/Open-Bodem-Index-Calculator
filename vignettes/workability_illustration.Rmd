@@ -1,0 +1,303 @@
+---
+title: "Workability illustration"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+bibliography: [packages.bib, workability_references.bib]
+vignette: >
+  %\VignetteIndexEntry{Workability illustration}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+require(data.table)
+require(ggplot2)
+require(OBIC)
+require(patchwork)
+knitr::opts_chunk$set(echo = FALSE,
+                      collapse = TRUE,
+                      comment = "#>")
+options(rmarkdown.html_vignette.check_title = FALSE)
+```
+
+
+## OBI-workability
+
+Let consider some fields with the following properties
+
+```{r make data}
+# make data table
+ dt <- data.table(field = factor(seq(1,4,1)),
+      A_CLAY_MI = c(15.6, 22.6, 2.9, 3.1),
+      A_SILT_MI = c(16.7, 36.6, 8.6, 10.6),
+      B_LU_BRP = c(233, 256, 265, 265),
+      B_SOILTYPE_AGR = c('zeeklei', 'zeeklei',  'dekzand', 'veen'),
+      B_GWL_GLG = c(173, 144, 115, 65),
+      B_GWL_GHG = c(21, 70, 49,  9),
+      B_GWL_ZCRIT = c(400, 400, 400, 400)
+    )
+# merge with crop names
+dt <- merge(dt, crops.obic[,.(crop_code, crop_name)], by.x = 'B_LU_BRP', by.y = 'crop_code')
+```
+
+````{r show dt}
+knitr::kable(dt, format = 'html')
+```
+
+```{r calc_workability indicator and score}
+# calc rsl/D_WO
+dt <- dt[,D_WO := calc_workability(dt$A_CLAY_MI, dt$A_SILT_MI, dt$B_LU_BRP, dt$B_SOILTYPE_AGR,
+                            dt$B_GWL_GLG, dt$B_GWL_GHG, dt$B_GWL_ZCRIT)]
+# calculate score
+dt <- dt[, I_P_WO := ind_workability(D_WO, B_LU_BRP)]
+
+```
+
+We have two arable fields on marine clay with wheat and sugar beets as well as two grassland fields, one on sand and one on peat. Lets plot the relative season length and indicator score for workability of these fields. Note that GLG is a measure for the average of the three lowest water levels in a period of eight years and GHG is the average of the three highest water levels over a period of eight years. It is assumed that the water level on our fields shifts from GHG on February 15th to GLG on August 15th and back following a sinusoidal curve. With this knowledge one can easily see that field 4 is much wetter than the other fields, both in winter as in summer. When comparing fields 1 and 2, we see that field 1 is drier in summer but more wet in winter.
+
+```{r plot regime curve, eval=FALSE, fig.width = 7, fig.height = 4,fig.fullwidth = TRUE}
+
+# try to plot the regime curve
+ggplot(data = dt[field == 4], aes(46:227,138+asin(-x-0.5*(B_GWL_GHG+B_GWL_GLG)/0.5*(B_GWL_GHG+B_GWL_GLG))/0.0172142, color = field))+
+  geom_point()
+
+x <- 46:227
+dt4 <- dt[field == 4]
+plot(x, 138+asin(-x-0.5*(dt4$B_GWL_GHG+dt4$B_GWL_GLG)/0.5*(dt4$B_GWL_GHG+dt4$B_GWL_GLG))/0.0172142,
+     ylim = c(-100,100))
+
+```
+
+
+```{r plot baseline, fig.width = 7, fig.height = 4,fig.fullwidth = TRUE}
+# plot the initial rsl and score
+gg <- ggplot(data = dt, 
+             aes(x= field, fill = field)) +  geom_col(aes(y = D_WO)) + 
+  theme_bw() +theme(axis.text = element_text(size = 10, color = 'black'),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title = element_text(size = 10),
+        legend.title = element_text(size = 10, face = 'bold'),
+        legend.text = element_text(size = 10, color = 'black'),
+        plot.title = element_text(size = 11)) + ylab('Relative season length')
+
+gg2 <- ggplot(data = dt, 
+             aes(x= field, fill = field)) +  geom_col(aes(y = I_P_WO)) + 
+  theme_bw() +theme(axis.text = element_text(size = 10, color = 'black'),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title = element_text(size = 10),
+        legend.title = element_text(size = 10, face = 'bold'),
+        legend.text = element_text(size = 10, color = 'black'),
+        plot.title = element_text(size = 11)) + ylab('Workability score')
+
+(gg|gg2) + plot_layout(guides = 'collect') + plot_annotation(caption = 'Baseline workability scores.',
+                                                             theme = theme(plot.caption = element_text(hjust = 0)))
+
+```
+
+Both amongst the grassland and the arable fields, we find a poorly performing and a reasonable performing field. If you look closely, you can see that field 1 scores much lower than field 4, despite having a higher relative growing season. This is because there is a more lenient evaluation of relative growing seasons specifically for permanent grassland.
+
+The relative season lenght, and in extension, the indicator score, are a function of the soil and hydrological properties of the field as well as the growing season and soil working depth requirements of the crop. By choosing a crop with a shorter growing season and or more shallow soil working depth, the score can be improved. Lets see how these parcels perform when we cultivate peas.
+
+```{r scoring with peas, fig.width = 7, fig.height = 4,fig.fullwidth = TRUE}
+# calc rsl/D_WO with peas instead of initial crops
+dt <- dt[,D_WO_pea := calc_workability(dt$A_CLAY_MI, dt$A_SILT_MI, B_LU_BRP = rep(308,4), dt$B_SOILTYPE_AGR,
+                            dt$B_GWL_GLG, dt$B_GWL_GHG, dt$B_GWL_ZCRIT)]
+# calculate score
+dt <- dt[, I_P_WO_pea := ind_workability(D_WO_pea, rep(308,4))]
+
+# plot scores
+gg <- ggplot(data = dt, 
+             aes(x= field, fill = field)) +  geom_col(aes(y = D_WO_pea)) + 
+  theme_bw() +theme(axis.text = element_text(size = 10, color = 'black'),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title = element_text(size = 10),
+        legend.title = element_text(size = 10, face = 'bold'),
+        legend.text = element_text(size = 10, color = 'black'),
+        plot.title = element_text(size = 11)) + ylab('Relative season length')
+
+gg2 <- ggplot(data = dt, 
+             aes(x= field, fill = field)) +  geom_col(aes(y = I_P_WO_pea)) + 
+  theme_bw() +theme(axis.text = element_text(size = 10, color = 'black'),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title = element_text(size = 10),
+        legend.title = element_text(size = 10, face = 'bold'),
+        legend.text = element_text(size = 10, color = 'black'),
+        plot.title = element_text(size = 11)) + ylab('Workability score')
+
+(gg|gg2) + plot_layout(guides = 'collect') + plot_annotation(caption = 'Workability scores when crop is peas.',
+                                                             theme = theme(plot.caption = element_text(hjust = 0)))
+
+```
+
+It worked! Or at least it did for the arable fields, the fields that used to have grass perform much worse now. So what happend? For the arable fields, the required number of days decreased.
+```{r table season lenghts}
+seasondt <- season.obic[landuse %in% c('suikerbieten', 'wintertarwe', 'erwten, bonen', 'beweid bemaaid gras')&soiltype.m == 'klei',
+                               .(landuse, req_days_pre_glg, req_days_post_glg, total_days)]
+knitr::kable(seasondt, format = 'html')
+```
+
+However, the required season for grassland is also much longer than that of peas, why do the grassland fields perform worse with peas? Because unlike permanent grassland, peas require working the soil at the beginning of the growing season, increasing the required depth of water in the soil. The required water level depth is determined by the  soiltype and soil particle fractions with the following code. Here 'gws_sub_workingdepth' is the groundwater level beneath working depth and spring depth is the working depth in spring. For perennial crops, like permanent grassland, the spring working depth is overwritten and set to 0. 
+
+```{r show working depth determining code, include= TRUE , fig.width = 7, fig.height = 4,fig.fullwidth = TRUE}
+## merge with OBIC crop and soil table
+  # load other tables
+  crops.obic <- OBIC::crops.obic
+  season.obic <- OBIC::season.obic
+  
+  dt <- merge(dt, crops.obic[, list(crop_code, crop_waterstress, crop_season)], 
+              by.x = "B_LU_BRP", by.y = "crop_code")
+  dt <- merge(dt, soils.obic[, list(soiltype, soiltype.m)], by.x = "B_SOILTYPE_AGR", by.y = "soiltype")
+  dt <- merge(dt, season.obic, by.x = c('crop_season','soiltype.m'), by.y = c('landuse', 'soiltype.m'))
+  
+## determine workability key numbers
+
+    # new parameters to be added
+    cols <- c('gws_sub_workingdepth','spring_depth')
+    
+  # sandy soils with variable silt content
+    dt[soiltype.m == 'zand' & A_SILT_MI < 10, c(cols) := list(45,35)]
+    dt[soiltype.m == 'zand' & A_SILT_MI >= 10 & A_SILT_MI < 20, c(cols) := list(55,30)]
+    dt[soiltype.m == 'zand' & A_SILT_MI >= 20, c(cols) := list(60,30)]
+      
+    # loess and peat soils
+    dt[soiltype.m == 'loess',c(cols) := list(65,12)]
+    dt[soiltype.m == 'veen',c(cols) := list(55,22)]
+    
+    # clay soils
+    dt[soiltype.m == 'klei' & A_CLAY_MI < 12, c(cols) := list(85,12)]
+    dt[soiltype.m == 'klei' & A_CLAY_MI >= 12 & A_CLAY_MI < 17, c(cols) := list(85,12)]
+    dt[soiltype.m == 'klei' & A_CLAY_MI >= 17 & A_CLAY_MI < 25, c(cols) := list(75,15)]
+    dt[soiltype.m == 'klei' & A_CLAY_MI >= 25 & A_CLAY_MI < 35, c(cols) := list(65,15)]
+    dt[soiltype.m == 'klei' & A_CLAY_MI >= 35, c(cols) := list(45,15)]
+    
+    # Overwrite spring working depth for perennial crops
+  crops.p <- c('boomteelt', 'overig boomteelt', 'groot fruit','grasland zonder herinzaai', 'grasland met herinzaai')
+  dt[crop_waterstress %in% crops.p,spring_depth := 0]
+
+```
+
+
+For field 4 (soiltype.m = 'veen'), the required depth when cultivating permanent grass is 55+0=55cm, while with peas the required depth is 55+22=77. In the case of field 4, it happens to be that the required depth for the spring soil work is deeper than the lowest ground water level (GLG) when cultivating an anual crop. So, the groundwater is always to high for the field to be workable for cultivating peas.
+
+```{r add soil params}
+  ## determine workability key numbers
+
+    # new parameters to be added
+    cols <- c('gws_sub_workingdepth','spring_depth')
+    
+    # sandy soils with variable silt content
+    dt[soiltype.m == 'zand' & A_SILT_MI < 10, c(cols) := list(45,35)]
+    dt[soiltype.m == 'zand' & A_SILT_MI >= 10 & A_SILT_MI < 20, c(cols) := list(55,30)]
+    dt[soiltype.m == 'zand' & A_SILT_MI >= 20, c(cols) := list(60,30)]
+      
+    # loess and peat soils
+    dt[soiltype.m == 'loess',c(cols) := list(65,12)]
+    dt[soiltype.m == 'veen',c(cols) := list(55,22)]
+    
+    # clay soils
+    dt[soiltype.m == 'klei' & A_CLAY_MI < 12, c(cols) := list(85,12)]
+    dt[soiltype.m == 'klei' & A_CLAY_MI >= 12 & A_CLAY_MI < 17, c(cols) := list(85,12)]
+    dt[soiltype.m == 'klei' & A_CLAY_MI >= 17 & A_CLAY_MI < 25, c(cols) := list(75,15)]
+    dt[soiltype.m == 'klei' & A_CLAY_MI >= 25 & A_CLAY_MI < 35, c(cols) := list(65,15)]
+    dt[soiltype.m == 'klei' & A_CLAY_MI >= 35, c(cols) := list(45,15)]
+```
+```{r show soil working params}
+# make table with understanable names
+dtt <- dt
+setnames(dtt, c('gws_sub_workingdepth', 'spring_depth'), c('Water lvl below workingdepth', 'Spring working depth'))
+
+# calculate required depth
+dtt <- dtt[,required_depth := `Water lvl below workingdepth`+`Spring working depth`]
+dtt <- dtt[,.(field, B_GWL_GLG, B_GWL_GHG, `Water lvl below workingdepth`, `Spring working depth`, required_depth)]
+
+# display talbe
+knitr::kable(dtt, format = 'html')
+```
+
+As we have seen, crop growing season requirements are not the only variable affecting the relative growing season length and workability score. Ground water levels are really what determines when the land can be worked. Lets see what would happen to our fields if they become drier by increasing both their lowest and highest water level by 30 percent.
+
+```{r show lower water , fig.width = 7, fig.height = 4,fig.fullwidth = TRUE}
+# calc rsl/D_WO with peas instead of initial crops
+dt <- dt[,D_WO_dry := calc_workability(dt$A_CLAY_MI, dt$A_SILT_MI, dt$B_LU_BRP, dt$B_SOILTYPE_AGR,
+                            dt$B_GWL_GLG*1.3, dt$B_GWL_GHG*1.3, dt$B_GWL_ZCRIT)]
+# calculate score
+dt <- dt[, I_P_WO_dry := ind_workability(D_WO_dry, B_LU_BRP)]
+
+# plot scores
+gg <- ggplot(data = dt, 
+             aes(x= field, fill = field)) +  geom_col(aes(y = D_WO_dry)) + 
+  theme_bw() +theme(axis.text = element_text(size = 10, color = 'black'),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title = element_text(size = 10),
+        legend.title = element_text(size = 10, face = 'bold'),
+        legend.text = element_text(size = 10, color = 'black'),
+        plot.title = element_text(size = 11)) + ylab('Relative season length')
+
+gg2 <- ggplot(data = dt, 
+             aes(x= field, fill = field)) +  geom_col(aes(y = I_P_WO_dry)) + 
+  theme_bw() +theme(axis.text = element_text(size = 10, color = 'black'),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title = element_text(size = 10),
+        legend.title = element_text(size = 10, face = 'bold'),
+        legend.text = element_text(size = 10, color = 'black'),
+        plot.title = element_text(size = 11)) + ylab('Workability score')
+
+(gg|gg2) + plot_layout(guides = 'collect') + plot_annotation(caption = 'Workability with lowered GLG and GHG.',
+                                                             theme = theme(plot.caption = element_text(hjust = 0)))
+
+```
+
+As you may have suspected, lower water levels resulted in higher relative growing seasons and workability scores.
+
+## B_GWL_ZCrit
+Sometimes, capillary rise of water may fall behind evaporation. If this is the case, the soil will dry out relatively quickly and may be workable sooner. In our example data, B_GWL_ZCRIT was set to 400 meaning that over a distance of 400 cm between the groundwater table and the soil surface, the soil is able to supply at least 2 mm of water per day. It is estimated that evaporation in the Netherlands in spring is about 2mm per day.
+Lets set B_GWL_ZCRIT to 50 and see what happens to our scores.
+
+```{r plot with low zcrit , fig.width = 7, fig.height = 4,fig.fullwidth = TRUE}
+# calc rsl/D_WO with peas instead of initial crops
+dt <- dt[,D_WO_lzcrit := calc_workability(dt$A_CLAY_MI, dt$A_SILT_MI, dt$B_LU_BRP, dt$B_SOILTYPE_AGR,
+                            dt$B_GWL_GLG, dt$B_GWL_GHG, rep(50,4))]
+# calculate score
+dt <- dt[, I_P_WO_lzcrit := ind_workability(D_WO_lzcrit, B_LU_BRP)]
+
+# plot scores
+gg <- ggplot(data = dt, 
+             aes(x= field, fill = field)) +  geom_col(aes(y = D_WO_lzcrit)) + 
+  theme_bw() +theme(axis.text = element_text(size = 10, color = 'black'),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title = element_text(size = 10),
+        legend.title = element_text(size = 10, face = 'bold'),
+        legend.text = element_text(size = 10, color = 'black'),
+        plot.title = element_text(size = 11)) + ylab('Relative season length') 
+
+gg2 <- ggplot(data = dt, 
+             aes(x= field, fill = field)) +  geom_col(aes(y = I_P_WO_lzcrit)) + 
+  theme_bw() +theme(axis.text = element_text(size = 10, color = 'black'),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title = element_text(size = 10),
+        legend.title = element_text(size = 10, face = 'bold'),
+        legend.text = element_text(size = 10, color = 'black'),
+        plot.title = element_text(size = 11)) + ylab('Workability score')
+
+(gg|gg2) + plot_layout(guides = 'collect') + plot_annotation(caption = 'Workability scores with B_GWL_ZCRIT set to 50.',
+                                                             theme = theme(plot.caption = element_text(hjust = 0)))
+
+
+```
+
+The methodology for assessing workability is an adaptation from @Huinink2018
+
+```{r, include=FALSE}
+knitr::write_bib(c(.packages()), "packages.bib")
+knitr::write_bib(file = 'packages.bib')
+```
+
+## References

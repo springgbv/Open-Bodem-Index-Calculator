@@ -35,7 +35,7 @@ calc_grass_age <- function(ID, B_LU_BRP) {
   
   # Calculate the age of the grassland
   dt[, grass := ifelse(crop_category == "grasland", 1, 0)]
-  dt[, grass_age := rev(cumsum(grass)),by = rleid(grass)]
+  dt[, grass_age := rev(cumsum(grass)),by = rleid(ID, grass)]
  
   # extract grass age 
   value <- dt[, grass_age]

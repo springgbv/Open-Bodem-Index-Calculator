@@ -1,4 +1,4 @@
-﻿column;type;description_nl;description_en;unit;method
+column;type;description_nl;description_en;unit;method
 A_CLAY_MI;measurement;Kleigehalte;Clay content;%;
 A_SAND_MI;measurement;Zandgehalte;Sand content;%;
 A_SILT_MI;measurement;Siltgehalte;Silt content;%;
@@ -53,7 +53,7 @@ D_CP_STARCH;derivative;Fractie zetmeelaardappelen in rotatie;The fraction of sta
 D_CP_POTATO;derivative;Fractie consumptieaardappelen in rotatie;The fraction of potato in crop rotation;-;
 D_CP_SUGARBEET;derivative;Fractie suikerbiet in rotatie;The fraction of sugarbeet in crop rotation;-;
 D_CP_GRASS;derivative;Fractie grasland in rotatie;The fraction of grass in crop rotation;-;
-D_CP_MAIS;derivative;Fractie maïs in rotatie;The fraction of mais in crop rotation;-;
+D_CP_MAIS;derivative;Fractie mais in rotatie;The fraction of mais in crop rotation;-;
 D_CP_OTHER;derivative;Fractie overige gewassen in rotatie;The fraction of other in crop rotaton;-;
 D_CP_RUST;derivative;Fractie rustgewassen;"The fraction ""crops improving soil quality""";-;
 D_CP_RUSTDEEP;derivative;Fractie diep wortelende rustgewassen;The fraction of deep rooting crops;-;

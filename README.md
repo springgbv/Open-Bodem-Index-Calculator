@@ -2,6 +2,8 @@
 
 <!-- badges: start -->
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![R-CMD-check](https://github.com/springgbv/Open-Bodem-Index-Calculator/workflows/R-CMD-check/badge.svg)](https://github.com/springgbv/Open-Bodem-Index-Calculator/actions)
+[![Codecov test coverage](https://codecov.io/gh/springgbv/Open-Bodem-Index-Calculator/branch/master/graph/badge.svg)](https://codecov.io/gh/springgbv/Open-Bodem-Index-Calculator?branch=master)
 <!-- badges: end -->
 
 This R package can be used to calculate the Open Bodem Index (OBI). 
